@@ -18,4 +18,9 @@ int Agent::getPartyId() const
 void Agent::step(Simulation &sim)
 {
     // TODO: implement this method
+
+    //chose party from set via Edge/Weight
+
+    // check that you dont alredy ivite this
+    // party --> invite
 }

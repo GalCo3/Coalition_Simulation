@@ -24,4 +24,6 @@ public:
 private:
     Graph mGraph;
     vector<Agent> mAgents;
+
+    //int iterationCounter
 };

@@ -8,11 +8,18 @@ Simulation::Simulation(Graph graph, vector<Agent> agents) : mGraph(graph), mAgen
 void Simulation::step()
 {
     // TODO: implement this method
+
+    //for each agent :: step
+
+
+    //i++
 }
 
 bool Simulation::shouldTerminate() const
 {
     // TODO implement this method
+
+    // check if coalition has 61 mandated or everyone join
     return true;
 }
 

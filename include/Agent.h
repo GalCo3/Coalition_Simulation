@@ -18,4 +18,7 @@ private:
     int mAgentId;
     int mPartyId;
     SelectionPolicy *mSelectionPolicy;
+    // int mandatesNumber
+
+    //vector<int> invtiePartyIds
 };

@@ -24,10 +24,19 @@ public:
     void step(Simulation &s);
     const string &getName() const;
 
+    //int getCoalition
+    // void invite
+
 private:
     int mId;
     string mName;
     int mMandates;
     JoinPolicy *mJoinPolicy;
     State mState;
+
+    //int coatlition - agent number 
+
+    //iterrationInvite 
+    // vector<patry> setOfInvites
+    // party LastInvite
 };

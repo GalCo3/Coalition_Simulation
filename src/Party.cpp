@@ -27,5 +27,18 @@ const string & Party::getName() const
 
 void Party::step(Simulation &s)
 {
-    // TODO: implement this method
+
+    // if itteration counter != -1  itteration counter  = start iterraion + 3 --> decide and change color to red
+
+    //else
+    
+
 }
+
+
+//void invite
+// start iteration to iterrartion counter ##JUST ONCE##
+
+    // change color if not changed to yellow
+    // add invite to set
+    // change lastInvite 
