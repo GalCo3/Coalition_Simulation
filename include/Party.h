@@ -24,8 +24,7 @@ public:
     void step(Simulation &s);
     const string &getName() const;
 
-    //int getCoalition
-    // void invite
+    // void invite()
 
 private:
     int mId;
@@ -34,9 +33,11 @@ private:
     JoinPolicy *mJoinPolicy;
     State mState;
 
-    //int coatlition - agent number 
 
-    //iterrationInvite 
-    // vector<patry> setOfInvites
-    // party LastInvite
+    int iterrationInvite ;
+    int coalition; // agent number 
+
+    vector<int> partysIdsInvites;
+    vector<int> agentsIdsInvites;
+    int idLastInvite;
 };
