@@ -6,7 +6,7 @@ class Coalition {
 
     public:
 
-    Coalition(int id);
+    Coalition(int agentId, Party& party);
 
     
     vector<int> getIds;
@@ -14,6 +14,7 @@ class Coalition {
 
     void addInvite(int partyId);
     void addParty(Party& party);
+    bool isInvited(int partyId);
     
     bool shouldTerminate();
     

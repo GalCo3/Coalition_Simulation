@@ -13,11 +13,12 @@ public:
     int getPartyId() const;
     int getId() const;
     void step(Simulation &);
+    int getCoalitonId();
 
 private:
     int mAgentId;
     int mPartyId;
-    
+    int mCoalitionId;
     SelectionPolicy *mSelectionPolicy;
     
 

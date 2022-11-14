@@ -15,6 +15,11 @@ int Agent::getPartyId() const
     return mPartyId;
 }
 
+int Agent::getCoalitonId()
+{
+    return mCoalitionId;
+}
+
 void Agent::step(Simulation &sim)
 {
     // TODO: implement this method

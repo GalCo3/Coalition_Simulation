@@ -1,7 +1,14 @@
 #pragma once
 
-class JoinPolicy {};
+class JoinPolicy {
 
-class MandatesJoinPolicy : public JoinPolicy {};
+    virtual void join() = 0;
+
+};
+
+class MandatesJoinPolicy : public JoinPolicy 
+{
+    
+};
 
 class LastOfferJoinPolicy : public JoinPolicy {};
