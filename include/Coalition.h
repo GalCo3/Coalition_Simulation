@@ -16,7 +16,7 @@ class Coalition {
     void addParty(Party& party);
     bool isInvited(int partyId);
     
-    bool shouldTerminate();
+    bool shouldTerminate() const; 
     
     private:
 

@@ -47,3 +47,20 @@ Party &Graph::getParty(int partyId)
 {
     return mVertices[partyId];
 }
+
+void Graph::stepGraph(Simulation& sim)
+{
+    for(Party& party : mVertices)
+    {
+        party.step(sim);
+    }
+}
+
+
+bool Graph::everyOne_Red() const{
+    for(const Party& party: mVertices){
+        if(party.getState()!=State::Joined)
+            return false;
+    }
+    return true;
+}

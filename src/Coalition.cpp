@@ -13,7 +13,7 @@ Coalition::Coalition(int id, Party& party)
     party.setState(State::Joined);
 }
 
-bool Coalition:: shouldTerminate()
+bool Coalition:: shouldTerminate() const
 {
     return mandatesSum>= 61;
 }

@@ -32,6 +32,7 @@ public:
     int getPartyIdMostMandates();
     int getPartyIdLastInvite();
 
+    
 
 
 private:

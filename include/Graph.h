@@ -14,6 +14,8 @@ public:
     vector<int> getPotentialNeighbors(int partyId);
     const Party &getParty(int partyId) const;
     Party &getParty(int partyId);
+    void stepGraph(Simulation& sim);
+    bool everyOne_Red() const;
 
 private:
     vector<Party> mVertices;

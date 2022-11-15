@@ -15,12 +15,13 @@ Simulation::Simulation(Graph graph, vector<Agent> agents) : mGraph(graph), mAgen
 
 void Simulation::step()
 {
-    // TODO: implement this method
+    
+    mGraph.stepGraph(*this); //step for partys -- because this is a private field in graph
 
-    //for each agent :: step
-
-
-    //i++
+    for(Agent& agent : mAgents)
+    {
+        agent.step(*this);
+    }
 }
 
 bool Simulation::shouldTerminate() const
@@ -28,6 +29,13 @@ bool Simulation::shouldTerminate() const
     // TODO implement this method
 
     // check if coalition has 61 mandated or everyone join
+    for(const Coalition& coalition : mCoalition)
+    {
+        if(coalition.shouldTerminate());
+            {return true;}
+    }
+
+    
     return true;
 }
 
