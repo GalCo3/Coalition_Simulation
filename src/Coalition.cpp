@@ -10,6 +10,7 @@ Coalition::Coalition(int id, Party& party)
     partysIds;
     partysIdsInvites;
     partysIds.push_back(party.getId());
+    party.setState(State::Joined);
 }
 
 bool Coalition:: shouldTerminate()

@@ -5,7 +5,7 @@ Party::Party(int id, string name, int mandates, JoinPolicy *jp) : mId(id), mName
     // You can change the implementation of the constructor, but not the signature!
     iterrationInvite = -1;
     coalition = -1;
-
+    mState=State::Waiting;
     
 }
 
@@ -47,11 +47,7 @@ int Party::getId()
 void Party::invite(int partyId, int i)
 // start iteration to iterrartion counter ##JUST ONCE##
 {
-    if(iterrationInvite == -1)
-        {
-            iterrationInvite = i;
-            partysIdsInvites
-        }
+    
     // change color if not changed to yellow
     // add invite to set
     // change lastInvite 

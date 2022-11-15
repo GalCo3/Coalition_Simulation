@@ -29,6 +29,11 @@ public:
     int getCoalition();
     void setCoalition(int coalitionId);
 
+    int getPartyIdMostMandates();
+    int getPartyIdLastInvite();
+
+
+
 private:
 
     
@@ -42,7 +47,7 @@ private:
     int iterrationInvite ;
     int coalition; // agent number 
 
-    vector<int> partysIdsInvites;
-    vector<int> agentsIdsInvites;
-    int idLastInvite;
+    int coalitionId_MostMandates;
+    int inviteMaxMaandat;
+    int coalitionIdLastInvite;
 };
