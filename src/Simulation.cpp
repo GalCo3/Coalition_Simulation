@@ -71,3 +71,8 @@ Coalition& Simulation::getCoalition(int coalitionId)
 {
     return mCoalition[coalitionId];
 }
+
+int Simulation::getIterationCounter(){
+    return iterationCounter;
+}
+

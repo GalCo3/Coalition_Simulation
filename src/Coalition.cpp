@@ -42,4 +42,9 @@ void Coalition::addParty(Party& party)
     mandatesSum = mandatesSum + party.getMandates();
     partysIds.push_back(party.getId());
 }
-
+int Coalition::getId(){
+    return coalitionId;
+}
+int Coalition::getMandatesSum(){
+    return mandatesSum;
+}

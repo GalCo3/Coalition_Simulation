@@ -24,6 +24,7 @@ public:
     const vector<vector<int>> getPartiesByCoalitions() const;
     Coalition &getCoalition(int coalitionId);
     Party &getParty(int partyId);
+    int getIterationCounter();
 
 private:
     Graph mGraph;

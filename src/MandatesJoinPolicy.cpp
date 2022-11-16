@@ -5,6 +5,7 @@ MandatesJoinPolicy::MandatesJoinPolicy()
 {
 
 }
-void MandatesJoinPolicy::join(Party& party){
-    
+void MandatesJoinPolicy::join(Party& party,Simulation& sim){
+    party.join(party.getCoalitionIdMostMandates(), sim);
 }
+

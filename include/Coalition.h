@@ -15,8 +15,9 @@ class Coalition {
     void addInvite(int partyId);
     void addParty(Party& party);
     bool isInvited(int partyId);
-    
     bool shouldTerminate() const; 
+    int getId();
+    int getMandatesSum();
     
     private:
 

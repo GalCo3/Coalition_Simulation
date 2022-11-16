@@ -1,6 +1,8 @@
 #pragma once
 #include <string>
 #include <vector>
+#include "Simulation.h"
+#include "JoinPolicy.h"
 using std::string;
 
 class JoinPolicy;
@@ -24,13 +26,15 @@ public:
     void step(Simulation &s);
     const string &getName() const;
     int getId();
-    void invite(int partyId,int i);
+    void invite(Coalition& coalition,int i);
 
     int getCoalition();
     void setCoalition(int coalitionId);
 
-    int getPartyIdMostMandates();
-    int getPartyIdLastInvite();
+    int getCoalitionIdMostMandates();
+    int getCoalitionIdLastInvite();
+    void join(int coalitionIdToJoin,Simulation& sim);
+    
 
     
 
@@ -49,6 +53,7 @@ private:
     int coalition; // agent number 
 
     int coalitionId_MostMandates;
-    int inviteMaxMaandat;
+    int inviteMaxMandats;
     int coalitionIdLastInvite;
+
 };

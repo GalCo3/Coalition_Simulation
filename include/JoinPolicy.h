@@ -3,8 +3,8 @@
 
 class JoinPolicy {
 
-
-    virtual void join(Party& party) = 0;
+    public:
+    virtual void join(Party& party,Simulation& sim) = 0;
 
 };
 
@@ -12,13 +12,13 @@ class MandatesJoinPolicy : public JoinPolicy
 {
     public:
     MandatesJoinPolicy();
-    void join(Party& party);
+    virtual void join(Party& party,Simulation& sim) override; 
 };
 
 class LastOfferJoinPolicy : public JoinPolicy 
 {
     public:
     LastOfferJoinPolicy();
-    void join(Party& party);
+    virtual void join(Party& party,Simulation& sim) override;
 
 };

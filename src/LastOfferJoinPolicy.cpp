@@ -5,6 +5,7 @@ LastOfferJoinPolicy::LastOfferJoinPolicy()
 {
 
 }
-void LastOfferJoinPolicy::join(Party& party){
-    
+void LastOfferJoinPolicy::join(Party& party,Simulation& sim){
+    party.join(party.getCoalitionIdLastInvite(), sim);
 }
+
