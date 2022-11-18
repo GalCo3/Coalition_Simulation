@@ -22,7 +22,19 @@ int Agent::getCoalitonId()
 
 void Agent::step(Simulation &sim)
 {
+    vector<int> potentialNeighbors = sim.getGraph().getPotentialNeighbors(mPartyId);
+    vector<int> potentialNeighborsOut;
+    Coalition coalition = sim.getCoalition(mCoalitionId);
+    for(int newPotential: potentialNeighbors)
+    {
+        if(!coalition.isInvited(newPotential)){
+            potentialNeighborsOut.push_back(newPotential);
+        }
+    }
+
+    mSelectionPolicy->Select(sim,mPartyId,potentialNeighborsOut);
     // TODO: implement this method
+
 
     //chose party from set via Edge/Weight
 

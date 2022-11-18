@@ -9,10 +9,10 @@ void MandatesSelectionPolicy::Select(Simulation& simulation,int partyId,vector<i
     for(int partyIdV: partyIds){
         if(simulation.getParty(partyIdV).getMandates()>maxMandats){
             maxMandats=simulation.getParty(partyIdV).getMandates();
-            maxId=simulation.getParty(partyIdV).getId();
+            maxId=partyIdV;
         }
     }
-
-    //invite the party
-    // add to coalition the invite
+    simulation.getParty(maxId).invite(simulation.getCoalition(simulation.getParty(partyId).getCoalition()),simulation.getIterationCounter());//invite the party
+    simulation.getCoalition(simulation.getParty(partyId).getCoalition()).addInvite(maxId); // add to coalition the invite
+    
 }

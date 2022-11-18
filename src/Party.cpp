@@ -9,6 +9,115 @@ Party::Party(int id, string name, int mandates, JoinPolicy *jp) : mId(id), mName
     
 }
 
+Party::~Party() //destructor
+{
+    if (mJoinPolicy)
+    {
+        delete mJoinPolicy;
+    }
+    
+}
+
+Party::Party(const Party& other) //copy constructor
+{
+    mId = other.mId;
+    mName = other.mName; 
+    mMandates = other.mMandates;
+    mState = other.mState;
+    iterrationInvite = other.iterrationInvite;
+    coalition = other.coalition;
+    coalitionId_MostMandates = other.coalitionId_MostMandates;
+    inviteMaxMandats = other.inviteMaxMandats;
+    coalitionIdLastInvite = other.coalitionIdLastInvite;
+
+    if (other.mJoinPolicy->getJoinType() == "M")
+    {
+        mJoinPolicy = new MandatesJoinPolicy();
+    }
+    else
+    {
+        mJoinPolicy = new LastOfferJoinPolicy();
+    }
+    
+}
+
+Party::Party(Party && other) //move constructor
+{
+    mId = other.mId;
+    mName = other.mName; 
+    mMandates = other.mMandates;
+    mState = other.mState;
+    iterrationInvite = other.iterrationInvite;
+    coalition = other.coalition;
+    coalitionId_MostMandates = other.coalitionId_MostMandates;
+    inviteMaxMandats = other.inviteMaxMandats;
+    coalitionIdLastInvite = other.coalitionIdLastInvite;
+
+    mJoinPolicy = other.mJoinPolicy;
+    other.mJoinPolicy = nullptr;
+
+}
+
+
+Party& Party::operator=(const Party& other)
+{
+    mId = other.mId;
+    mName = other.mName; 
+    mMandates = other.mMandates;
+    mState = other.mState;
+    iterrationInvite = other.iterrationInvite;
+    coalition = other.coalition;
+    coalitionId_MostMandates = other.coalitionId_MostMandates;
+    inviteMaxMandats = other.inviteMaxMandats;
+    coalitionIdLastInvite = other.coalitionIdLastInvite;
+    
+
+    string temp = other.mJoinPolicy->getJoinType();
+
+    if (mJoinPolicy->getJoinType()!= temp)
+    {
+        delete mJoinPolicy;
+        if (temp == "M")
+        {
+            mJoinPolicy = new MandatesJoinPolicy();
+        }
+        else
+        {
+            mJoinPolicy = new LastOfferJoinPolicy();
+        }
+        
+    }
+    return *this;
+}
+
+Party& Party::operator=(Party && other)
+{
+    mId = other.mId;
+    mName = other.mName; 
+    mMandates = other.mMandates;
+    mState = other.mState;
+    iterrationInvite = other.iterrationInvite;
+    coalition = other.coalition;
+    coalitionId_MostMandates = other.coalitionId_MostMandates;
+    inviteMaxMandats = other.inviteMaxMandats;
+    coalitionIdLastInvite = other.coalitionIdLastInvite;
+    
+
+    delete mJoinPolicy;
+    mJoinPolicy = other.mJoinPolicy;
+    other.mJoinPolicy=nullptr;
+    
+    return *this;
+}
+
+
+
+
+
+
+
+
+
 State Party::getState() const
 {
     return mState;
@@ -78,10 +187,13 @@ void Party::setCoalition(int coalitionId)
 
 
 void Party::join(int coalitionIdToJoin, Simulation& sim){
+
     sim.getCoalition(coalitionIdToJoin).addParty(*this);
-    setCoalition(coalitionIdToJoin);
+    coalition = coalitionIdToJoin;
     setState(State::Joined);
 }
+
+
 int Party::getCoalitionIdLastInvite(){
     return coalitionIdLastInvite;
 }
