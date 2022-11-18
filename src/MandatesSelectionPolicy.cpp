@@ -3,7 +3,7 @@
 MandatesSelectionPolicy::MandatesSelectionPolicy(){
 
 }
-void MandatesSelectionPolicy::Select(Simulation& simulation,int partyId,vector<int>& partyIds){
+void MandatesSelectionPolicy::Select(Simulation& simulation,int partyId,vector<int>& partyIds,int agentId){
     int maxMandats=0;
     int maxId=-1;
     for(int partyIdV: partyIds){
@@ -12,7 +12,14 @@ void MandatesSelectionPolicy::Select(Simulation& simulation,int partyId,vector<i
             maxId=partyIdV;
         }
     }
-    simulation.getParty(maxId).invite(simulation.getCoalition(simulation.getParty(partyId).getCoalition()),simulation.getIterationCounter());//invite the party
+    simulation.getParty(maxId).invite(simulation.getCoalition(simulation.getParty(partyId).getCoalition()),agentId,simulation.getIterationCounter());//invite the party
     simulation.getCoalition(simulation.getParty(partyId).getCoalition()).addInvite(maxId); // add to coalition the invite
     
+}
+SelectionPolicy* MandatesSelectionPolicy::clone(){
+    return new MandatesSelectionPolicy();
+}
+string MandatesSelectionPolicy::getSelectionType()
+{
+    return "M";
 }

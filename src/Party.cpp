@@ -5,7 +5,11 @@ Party::Party(int id, string name, int mandates, JoinPolicy *jp) : mId(id), mName
     // You can change the implementation of the constructor, but not the signature!
     iterrationInvite = -1;
     coalition = -1;
-    
+    coalitionId_MostMandates=-1;
+    inviteMaxMandats=-1;
+    agentIdMaxMadndates=-1;
+    coalitionIdLastInvite=-1;
+    agentIdLastOffer =-1;
 }
 
 Party::~Party() //destructor
@@ -139,7 +143,7 @@ int Party::getId()
     return mId;
 }
 
-void Party::invite(Coalition& coalition, int i)
+void Party::invite(Coalition& coalition,int agentId, int i)
 // start iteration to iterrartion counter ##JUST ONCE##
 {
     if(iterrationInvite==-1){
@@ -147,9 +151,12 @@ void Party::invite(Coalition& coalition, int i)
         mState=CollectingOffers; // change color if not changed to yellow
     }
     coalitionIdLastInvite=coalition.getId();// change lastInvite 
+    agentIdLastOffer = agentId;
+
     if(inviteMaxMandats<coalition.getMandatesSum()||(inviteMaxMandats==coalition.getMandatesSum()&& coalitionId_MostMandates>coalition.getId()) ){
         inviteMaxMandats=coalition.getMandatesSum();
         coalitionId_MostMandates= coalition.getId();
+        agentIdMaxMadndates = agentId;
     }
     
  
@@ -167,11 +174,22 @@ void Party::setCoalition(int coalitionId)
 }
 
 
-void Party::join(int coalitionIdToJoin, Simulation& sim){
+void Party::join(int coalitionIdToJoin, Simulation& sim,int which){
 
     sim.getCoalition(coalitionIdToJoin).addParty(*this);
     coalition = coalitionIdToJoin;
     setState(State::Joined);
+    
+    if (which == 0)
+    {
+        sim.newAgent(agentIdLastOffer,mId);
+    }
+
+    else
+    {
+        sim.newAgent(agentIdMaxMadndates,mId);
+    }
+    
 }
 
 

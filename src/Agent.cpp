@@ -11,28 +11,55 @@ Agent::~Agent()
     }
 }
 
-Agent::Agent(const Agent& other) //copy constructor
+Agent::Agent(const Agent& other)://copy constructor
+    mAgentId(other.mAgentId),mPartyId(other.mPartyId),mCoalitionId(other.mCoalitionId),mSelectionPolicy(other.mSelectionPolicy->clone())
+{
+    
+}
+//move constructor
+Agent::Agent(Agent && other) :
+
+    mAgentId(other.mAgentId),mPartyId(other.mPartyId),mCoalitionId(other.mCoalitionId),mSelectionPolicy(other.mSelectionPolicy)
+{
+    other.mSelectionPolicy= nullptr;
+}
+
+Agent& Agent::operator=(const Agent& other)
 {
     mAgentId = other.mAgentId;
     mPartyId = other.mPartyId; 
     mCoalitionId = other.mCoalitionId;
     
-    if (other.mSelectionPolicy->getJoinType() == "M")
+    string temp = other.mSelectionPolicy->getSelectionType();
+
+    if (mSelectionPolicy->getSelectionType()!= temp)
     {
-        mJoinPolicy = new MandatesJoinPolicy();
+        delete mSelectionPolicy;
+        if (temp == "M")
+        {
+            mSelectionPolicy = new MandatesSelectionPolicy();
+        }
+        else
+        {
+            mSelectionPolicy = new EdgeWeightSelectionPolicy();
+        }
+        
     }
-    else
-    {
-        mJoinPolicy = new LastOfferJoinPolicy();
-    }
-    
+    return *this;
 }
 
+Agent& Agent::operator=(Agent && other)
+{
+    mAgentId = other.mAgentId;
+    mPartyId = other.mPartyId; 
+    mCoalitionId = other.mCoalitionId;
 
-
-
-
-
+    delete mSelectionPolicy;
+    mSelectionPolicy = other.mSelectionPolicy;
+    other.mSelectionPolicy=nullptr;
+    
+    return *this;
+}
 
 
 int Agent::getId() const
@@ -50,6 +77,16 @@ int Agent::getCoalitonId()
     return mCoalitionId;
 }
 
+void Agent::setId(int id)
+{
+    mAgentId = id;
+}
+
+void Agent::setPartyId(int partyId)
+{
+    mPartyId = partyId;
+}
+
 void Agent::step(Simulation &sim)
 {
     vector<int> potentialNeighbors = sim.getGraph().getPotentialNeighbors(mPartyId);
@@ -62,7 +99,7 @@ void Agent::step(Simulation &sim)
         }
     }
 
-    mSelectionPolicy->Select(sim,mPartyId,potentialNeighborsOut);
+    mSelectionPolicy->Select(sim,mPartyId,potentialNeighborsOut,mAgentId);
     // TODO: implement this method
 
 

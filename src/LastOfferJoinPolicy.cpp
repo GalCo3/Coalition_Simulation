@@ -11,7 +11,7 @@ JoinPolicy* LastOfferJoinPolicy::clone(){
 }
 
 void LastOfferJoinPolicy::join(Party& party,Simulation& sim){
-    party.join(party.getCoalitionIdLastInvite(), sim);
+    party.join(party.getCoalitionIdLastInvite(), sim,0);
 }
 
 string LastOfferJoinPolicy::getJoinType()

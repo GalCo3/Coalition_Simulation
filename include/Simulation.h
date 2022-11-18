@@ -27,6 +27,10 @@ public:
     Coalition &getCoalition(int coalitionId);
     Party &getParty(int partyId);
     int getIterationCounter();
+    
+    void newAgent (int agentId,int partyId);
+
+    
 
 private:
     Graph mGraph;

@@ -24,6 +24,13 @@ void Simulation::step()
     }
 }
 
+void Simulation::newAgent(int agentId,int partyId)
+{
+    mAgents.push_back(Agent(mAgents[agentId]));
+    mAgents[mAgents.size()-1].setId(mAgents.size()-1);
+    mAgents[mAgents.size()-1].setPartyId(partyId);
+}
+
 bool Simulation::shouldTerminate() const
 {
     // TODO implement this method

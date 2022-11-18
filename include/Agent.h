@@ -16,6 +16,8 @@ public:
     Agent& operator=(const Agent& other);
     Agent& operator=(Agent && other);
 
+    void setId(int id);
+    void setPartyId(int partyId);
 
 
     int getPartyId() const;

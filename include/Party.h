@@ -33,14 +33,14 @@ public:
     void step(Simulation &s);
     const string &getName() const;
     int getId();
-    void invite(Coalition& coalition,int i);
+    void invite(Coalition& coalition,int agentId,int i);
 
     int getCoalition();
     void setCoalition(int coalitionId);
 
     int getCoalitionIdMostMandates();
     int getCoalitionIdLastInvite();
-    void join(int coalitionIdToJoin,Simulation& sim);
+    void join(int coalitionIdToJoin,Simulation& sim,int which); // if which ==0 --> we select the lastoffer agent else --> we select the mostMandates agent
     
 
     
@@ -61,6 +61,8 @@ private:
 
     int coalitionId_MostMandates;
     int inviteMaxMandats;
-    int coalitionIdLastInvite;
+    int agentIdMaxMadndates;
 
+    int coalitionIdLastInvite;
+    int agentIdLastOffer;
 };
