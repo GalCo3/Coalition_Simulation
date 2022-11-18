@@ -4,6 +4,36 @@ Agent::Agent(int agentId, int partyId, SelectionPolicy *selectionPolicy) : mAgen
 {
     // You can change the implementation of the constructor, but not the signature!
 }
+Agent::~Agent()
+{
+    if(mSelectionPolicy){
+        delete mSelectionPolicy;
+    }
+}
+
+Agent::Agent(const Agent& other) //copy constructor
+{
+    mAgentId = other.mAgentId;
+    mPartyId = other.mPartyId; 
+    mCoalitionId = other.mCoalitionId;
+    
+    if (other.mSelectionPolicy->getJoinType() == "M")
+    {
+        mJoinPolicy = new MandatesJoinPolicy();
+    }
+    else
+    {
+        mJoinPolicy = new LastOfferJoinPolicy();
+    }
+    
+}
+
+
+
+
+
+
+
 
 int Agent::getId() const
 {

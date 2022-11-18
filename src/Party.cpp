@@ -5,7 +5,6 @@ Party::Party(int id, string name, int mandates, JoinPolicy *jp) : mId(id), mName
     // You can change the implementation of the constructor, but not the signature!
     iterrationInvite = -1;
     coalition = -1;
-    mState=State::Waiting;
     
 }
 
@@ -18,44 +17,26 @@ Party::~Party() //destructor
     
 }
 
-Party::Party(const Party& other) //copy constructor
-{
-    mId = other.mId;
-    mName = other.mName; 
-    mMandates = other.mMandates;
-    mState = other.mState;
-    iterrationInvite = other.iterrationInvite;
-    coalition = other.coalition;
-    coalitionId_MostMandates = other.coalitionId_MostMandates;
-    inviteMaxMandats = other.inviteMaxMandats;
-    coalitionIdLastInvite = other.coalitionIdLastInvite;
+Party::Party(const Party& other) : 
+    mId(other.mId),mName(other.mName),mMandates(other.mMandates),
 
-    if (other.mJoinPolicy->getJoinType() == "M")
-    {
-        mJoinPolicy = new MandatesJoinPolicy();
-    }
-    else
-    {
-        mJoinPolicy = new LastOfferJoinPolicy();
-    }
-    
+    mJoinPolicy(other.mJoinPolicy->clone()),mState(other.mState),iterrationInvite(other.iterrationInvite),
+
+    coalition(other.coalition),coalitionId_MostMandates(other.coalitionId_MostMandates), 
+
+    inviteMaxMandats(other.inviteMaxMandats),coalitionIdLastInvite(other.coalitionIdLastInvite)//copy constructor
+{
+
 }
 
-Party::Party(Party && other) //move constructor
+ //move constructor
+Party::Party(Party && other) :
+
+    mId(other.mId),mName(other.mName),mMandates(other.mMandates),mJoinPolicy(other.mJoinPolicy),mState(other.mState),iterrationInvite(other.iterrationInvite),
+
+    coalition(other.coalition),coalitionId_MostMandates(other.coalitionId_MostMandates),inviteMaxMandats(other.inviteMaxMandats),coalitionIdLastInvite(other.coalitionIdLastInvite)
 {
-    mId = other.mId;
-    mName = other.mName; 
-    mMandates = other.mMandates;
-    mState = other.mState;
-    iterrationInvite = other.iterrationInvite;
-    coalition = other.coalition;
-    coalitionId_MostMandates = other.coalitionId_MostMandates;
-    inviteMaxMandats = other.inviteMaxMandats;
-    coalitionIdLastInvite = other.coalitionIdLastInvite;
-
-    mJoinPolicy = other.mJoinPolicy;
     other.mJoinPolicy = nullptr;
-
 }
 
 
