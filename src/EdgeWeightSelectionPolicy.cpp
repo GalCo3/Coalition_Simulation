@@ -1,8 +1,7 @@
 #include "../include/SelectionPolicy.h"
+#include "../include/Simulation.h"
 
-EdgeWeightSelectionPolicy::EdgeWeightSelectionPolicy(){
 
-}
 void EdgeWeightSelectionPolicy::Select(Simulation& simulation,int partyId,vector<int>& partyIds,int agentId){
     int maxWeight=0;
     int maxWeightId=-1;

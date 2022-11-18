@@ -11,7 +11,7 @@ public:
     int getMandates(int partyId) const;
     int getEdgeWeight(int v1, int v2) const;
     int getNumVertices() const;
-    vector<int> getPotentialNeighbors(int partyId);
+    void getPotentialNeighbors(int partyId,vector<int>& vec);
     const Party &getParty(int partyId) const;
     Party &getParty(int partyId);
     void stepGraph(Simulation& sim);

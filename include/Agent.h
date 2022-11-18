@@ -1,20 +1,20 @@
 #pragma once
 
 #include <vector>
-#include "Graph.h"
-#include "SelectionPolicy.h"
+// #include "SelectionPolicy.h"
 
+class Graph;
 class SelectionPolicy;
-
+class Simulation;
 class Agent
 {
 public:
     Agent(int agentId, int partyId, SelectionPolicy *selectionPolicy);
     virtual ~Agent();
     Agent(const Agent &other);
-    Agent(Agent && other);
+    Agent(Agent && other) noexcept;
     Agent& operator=(const Agent& other);
-    Agent& operator=(Agent && other);
+    Agent& operator=(Agent && other) noexcept;
 
     void setId(int id);
     void setPartyId(int partyId);
@@ -22,14 +22,14 @@ public:
 
     int getPartyId() const;
     int getId() const;
-    void step(Simulation &);
+    void step(Simulation & sim);
     int getCoalitonId();
 
 private:
     int mAgentId;
     int mPartyId;
-    int mCoalitionId;
     SelectionPolicy *mSelectionPolicy;
+    int mCoalitionId;
     
 
     

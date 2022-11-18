@@ -1,10 +1,8 @@
 #include  "../include/JoinPolicy.h"
+#include  "../include/Party.h"
 
 
-LastOfferJoinPolicy::LastOfferJoinPolicy() 
-{
 
-}
 
 JoinPolicy* LastOfferJoinPolicy::clone(){
     return new LastOfferJoinPolicy();

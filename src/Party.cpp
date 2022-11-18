@@ -1,15 +1,12 @@
-#include "Party.h"
+#include "../include/Party.h"
+#include "../include/Coalition.h"
+#include "../include/JoinPolicy.h"
+#include  "../include/Simulation.h"
 
-Party::Party(int id, string name, int mandates, JoinPolicy *jp) : mId(id), mName(name), mMandates(mandates), mJoinPolicy(jp), mState(Waiting) 
+Party::Party(int id, string name, int mandates, JoinPolicy *jp) : mId(id), mName(name), mMandates(mandates), mJoinPolicy(jp), mState(Waiting) ,iterrationInvite(-1),coalition(-1),
+coalitionId_MostMandates(-1),inviteMaxMandats(-1),agentIdMaxMadndates(-1),coalitionIdLastInvite(-1),agentIdLastOffer(-1)
 {
-    // You can change the implementation of the constructor, but not the signature!
-    iterrationInvite = -1;
-    coalition = -1;
-    coalitionId_MostMandates=-1;
-    inviteMaxMandats=-1;
-    agentIdMaxMadndates=-1;
-    coalitionIdLastInvite=-1;
-    agentIdLastOffer =-1;
+
 }
 
 Party::~Party() //destructor
@@ -28,17 +25,19 @@ Party::Party(const Party& other) :
 
     coalition(other.coalition),coalitionId_MostMandates(other.coalitionId_MostMandates), 
 
-    inviteMaxMandats(other.inviteMaxMandats),coalitionIdLastInvite(other.coalitionIdLastInvite)//copy constructor
+    inviteMaxMandats(other.inviteMaxMandats),agentIdMaxMadndates(other.agentIdMaxMadndates),coalitionIdLastInvite(other.coalitionIdLastInvite),//copy constructor
+    agentIdLastOffer(other.agentIdLastOffer)
 {
 
 }
 
  //move constructor
-Party::Party(Party && other) :
+Party::Party(Party && other) noexcept:
 
     mId(other.mId),mName(other.mName),mMandates(other.mMandates),mJoinPolicy(other.mJoinPolicy),mState(other.mState),iterrationInvite(other.iterrationInvite),
 
-    coalition(other.coalition),coalitionId_MostMandates(other.coalitionId_MostMandates),inviteMaxMandats(other.inviteMaxMandats),coalitionIdLastInvite(other.coalitionIdLastInvite)
+    coalition(other.coalition),coalitionId_MostMandates(other.coalitionId_MostMandates),inviteMaxMandats(other.inviteMaxMandats),agentIdMaxMadndates(other.agentIdMaxMadndates),coalitionIdLastInvite(other.coalitionIdLastInvite),agentIdLastOffer(other.agentIdLastOffer)
+    
 {
     other.mJoinPolicy = nullptr;
 }
@@ -75,7 +74,7 @@ Party& Party::operator=(const Party& other)
     return *this;
 }
 
-Party& Party::operator=(Party && other)
+Party& Party::operator=(Party && other) noexcept
 {
     mId = other.mId;
     mName = other.mName; 
@@ -131,10 +130,11 @@ void Party::step(Simulation &s)
         if(s.getIterationCounter()-iterrationInvite==3){
             mJoinPolicy ->join(*this,s);
         }
+        else{
+        // iterrationInvite++;
+        }
     }
-    else{
-        iterrationInvite++;
-    }
+    
 
 }
 

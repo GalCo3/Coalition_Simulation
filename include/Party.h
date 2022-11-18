@@ -1,12 +1,15 @@
 #pragma once
 #include <string>
 #include <vector>
-#include "Simulation.h"
-#include "JoinPolicy.h"
+// #include "Simulation.h"
+// #include "JoinPolicy.h"
+
+
 using std::string;
 
 class JoinPolicy;
 class Simulation;
+class Coalition;
 
 enum State
 {
@@ -22,9 +25,9 @@ public:
     
     virtual ~Party();
     Party(const Party &other);
-    Party(Party && other);
+    Party(Party && other) noexcept;
     Party& operator=(const Party& other);
-    Party& operator=(Party && other);
+    Party& operator=(Party && other) noexcept;
 
 
     State getState() const;

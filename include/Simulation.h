@@ -5,10 +5,16 @@
 #include "Graph.h"
 #include "Agent.h"
 #include "Coalition.h"
-#include "../include/Coalition.h"
+
 
 using std::string;
 using std::vector;
+
+class Party;
+// class Agent;
+// class Party;
+
+class Graph;
 
 class Simulation
 {
@@ -33,6 +39,7 @@ public:
     
 
 private:
+
     Graph mGraph;
     vector<Agent> mAgents;
     vector<Coalition> mCoalition;

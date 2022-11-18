@@ -1,10 +1,7 @@
 #include  "../include/JoinPolicy.h"
+#include  "../include/Party.h"
 
 
-MandatesJoinPolicy::MandatesJoinPolicy() 
-{
-
-}
 
 JoinPolicy* MandatesJoinPolicy::clone()
 {

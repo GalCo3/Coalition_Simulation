@@ -1,16 +1,12 @@
 #include "../include/Coalition.h"
+#include "../include/Party.h"
 
 
-
-Coalition::Coalition(int id, Party& party)
+Coalition::Coalition(int id, Party& party): coalitionId(id),mandatesSum(party.getMandates()),partysIds(),partysIdsInvites()
 {   
-    coalitionId = id;
-    mandatesSum = party.getMandates();
-    
-    partysIds;
-    partysIdsInvites;
     partysIds.push_back(party.getId());
     party.setState(State::Joined);
+    party.setCoalition(coalitionId);
 }
 
 bool Coalition:: shouldTerminate() const
@@ -28,10 +24,13 @@ bool Coalition::isInvited(int partyId)
 {
     // return true if the party is alredy invited
 
-    for (int i = 0; i < partysIdsInvites.size(); i++)
+    for(int partyIdV:partysIdsInvites)
     {
-        if(partysIdsInvites[i] = partyId)
-        return true;
+        if (partyIdV == partyId)
+        {
+            return true;
+        }
+        
     }
     return false;
 }
@@ -41,6 +40,7 @@ void Coalition::addParty(Party& party)
 {
     mandatesSum = mandatesSum + party.getMandates();
     partysIds.push_back(party.getId());
+    party.setCoalition(coalitionId);
 }
 int Coalition::getId(){
     return coalitionId;

@@ -1,4 +1,4 @@
-#include "Graph.h"
+#include "../include/Graph.h"
 
 Graph::Graph(vector<Party> vertices, vector<vector<int>> edges) : mVertices(vertices), mEdges(edges) 
 {
@@ -20,22 +20,23 @@ int Graph::getNumVertices() const
     return mVertices.size();
 }
 
-vector<int> Graph::getPotentialNeighbors(int partyId)
+void Graph::getPotentialNeighbors(int partyId,vector<int>& vec)
 {
-    vector<int> partyNeighbors;
-    for(int i = 0;i< mVertices.size() ; i++){
+    
 
-        if (i!= partyId & mEdges[partyId][i]!=0)
+    for (Party party:mVertices)
+    {
+        if (!(party.getId() == partyId) & !(mEdges[partyId][party.getId()] == 0) )
         {
-                if (mVertices[i].getState() != State::Joined)
+            if (mVertices[party.getId()].getState()!=State::Joined)
             {
-                partyNeighbors.push_back(i);
+                vec.push_back(party.getId());
             }
             
         }
         
     }
-
+    
 }
 
 const Party &Graph::getParty(int partyId) const

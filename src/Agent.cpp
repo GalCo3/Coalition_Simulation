@@ -1,8 +1,13 @@
-#include "Agent.h"
+#include "../include/Agent.h"
+#include "../include/Graph.h"
+#include "../include/SelectionPolicy.h"
+#include "../include/Simulation.h"
+#include "../include/Coalition.h"
 
-Agent::Agent(int agentId, int partyId, SelectionPolicy *selectionPolicy) : mAgentId(agentId), mPartyId(partyId), mSelectionPolicy(selectionPolicy)
+Agent::Agent(int agentId, int partyId, SelectionPolicy *selectionPolicy) : mAgentId(agentId), mPartyId(partyId), mSelectionPolicy(selectionPolicy),mCoalitionId(-1)
 {
     // You can change the implementation of the constructor, but not the signature!
+     
 }
 Agent::~Agent()
 {
@@ -12,14 +17,14 @@ Agent::~Agent()
 }
 
 Agent::Agent(const Agent& other)://copy constructor
-    mAgentId(other.mAgentId),mPartyId(other.mPartyId),mCoalitionId(other.mCoalitionId),mSelectionPolicy(other.mSelectionPolicy->clone())
+    mAgentId(other.mAgentId),mPartyId(other.mPartyId),mSelectionPolicy(other.mSelectionPolicy->clone()),mCoalitionId(other.mCoalitionId)
 {
     
 }
 //move constructor
-Agent::Agent(Agent && other) :
+Agent::Agent(Agent && other) noexcept:
 
-    mAgentId(other.mAgentId),mPartyId(other.mPartyId),mCoalitionId(other.mCoalitionId),mSelectionPolicy(other.mSelectionPolicy)
+    mAgentId(other.mAgentId),mPartyId(other.mPartyId),mSelectionPolicy(other.mSelectionPolicy),mCoalitionId(other.mCoalitionId)
 {
     other.mSelectionPolicy= nullptr;
 }
@@ -28,7 +33,6 @@ Agent& Agent::operator=(const Agent& other)
 {
     mAgentId = other.mAgentId;
     mPartyId = other.mPartyId; 
-    mCoalitionId = other.mCoalitionId;
     
     string temp = other.mSelectionPolicy->getSelectionType();
 
@@ -45,19 +49,20 @@ Agent& Agent::operator=(const Agent& other)
         }
         
     }
+    mCoalitionId = other.mCoalitionId;
     return *this;
 }
 
-Agent& Agent::operator=(Agent && other)
+Agent& Agent::operator=(Agent && other) noexcept
 {
     mAgentId = other.mAgentId;
     mPartyId = other.mPartyId; 
-    mCoalitionId = other.mCoalitionId;
 
     delete mSelectionPolicy;
     mSelectionPolicy = other.mSelectionPolicy;
     other.mSelectionPolicy=nullptr;
     
+    mCoalitionId = other.mCoalitionId;
     return *this;
 }
 
@@ -89,12 +94,13 @@ void Agent::setPartyId(int partyId)
 
 void Agent::step(Simulation &sim)
 {
-    vector<int> potentialNeighbors = sim.getGraph().getPotentialNeighbors(mPartyId);
+    vector<int> potentialNeighbors;
+    sim.getGraph().getPotentialNeighbors(mPartyId,potentialNeighbors);
     vector<int> potentialNeighborsOut;
-    Coalition coalition = sim.getCoalition(mCoalitionId);
+    // Coalition &coalition = sim.getCoalition(mCoalitionId);
     for(int newPotential: potentialNeighbors)
     {
-        if(!coalition.isInvited(newPotential)){
+        if(!sim.getCoalition(mCoalitionId).isInvited(newPotential)){
             potentialNeighborsOut.push_back(newPotential);
         }
     }

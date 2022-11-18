@@ -1,7 +1,10 @@
 #pragma once
 
-#include "Agent.h"
+// #include "Agent.h"
 #include <vector>
+using std::vector;
+class Party;
+
 class Coalition {
 
     public:
@@ -9,8 +12,8 @@ class Coalition {
     Coalition(int agentId, Party& party);
 
     
-    vector<int> getIds;
-    vector<int> getInvites;
+    // vector<int> getIds;
+    // vector<int> getInvites;
 
     void addInvite(int partyId);
     void addParty(Party& party);

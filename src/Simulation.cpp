@@ -1,14 +1,12 @@
-#include "Simulation.h"
+#include "../include/Simulation.h"
 
-Simulation::Simulation(Graph graph, vector<Agent> agents) : mGraph(graph), mAgents(agents) 
+Simulation::Simulation(Graph graph, vector<Agent> agents) : mGraph(graph), mAgents(agents) ,mCoalition(vector<Coalition>()),iterationCounter(0)
 {
     // You can change the implementation of the constructor, but not the signature!
-    iterationCounter = 0;
-    mCoalition;
-
-    for (int i = 0; i < mAgents.size(); i++)
+    // mCoalition;
+    for(Agent agent:mAgents)
     {
-        mCoalition.push_back(Coalition(mAgents[i].getId(),getParty(mAgents[i].getPartyId())));
+        mCoalition.push_back(Coalition(agent.getId(),getParty(agent.getPartyId())));
     }
     
 }
@@ -22,6 +20,8 @@ void Simulation::step()
     {
         agent.step(*this);
     }
+
+    iterationCounter++;
 }
 
 void Simulation::newAgent(int agentId,int partyId)
@@ -38,12 +38,14 @@ bool Simulation::shouldTerminate() const
     // check if coalition has 61 mandated or everyone join
     for(const Coalition& coalition : mCoalition)
     {
-        if(coalition.shouldTerminate());
-            {return true;}
+        if(coalition.shouldTerminate())
+        {return true;}
     }
-
     
-    return true;
+    if(mGraph.everyOne_Red())
+        return true;
+
+    return false;
 }
 
 const Graph &Simulation::getGraph() const

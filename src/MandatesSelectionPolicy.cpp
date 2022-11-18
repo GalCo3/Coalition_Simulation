@@ -1,8 +1,7 @@
 #include "../include/SelectionPolicy.h"
+#include  "../include/Simulation.h"
 
-MandatesSelectionPolicy::MandatesSelectionPolicy(){
 
-}
 void MandatesSelectionPolicy::Select(Simulation& simulation,int partyId,vector<int>& partyIds,int agentId){
     int maxMandats=0;
     int maxId=-1;
