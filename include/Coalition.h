@@ -21,6 +21,7 @@ class Coalition {
     bool shouldTerminate() const; 
     int getId();
     int getMandatesSum();
+    void getIds(vector<int>& v) const;
     
     private:
 

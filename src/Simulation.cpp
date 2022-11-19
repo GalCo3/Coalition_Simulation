@@ -78,7 +78,18 @@ Party &Simulation::getParty(int partyId)
 const vector<vector<int>> Simulation::getPartiesByCoalitions() const
 {
     // TODO: you MUST implement this method for getting proper output, read the documentation above.
-    return vector<vector<int>>();
+    
+    vector<vector<int>> out;
+    
+    for(const Coalition &c :mCoalition)
+    {
+        
+        out.push_back(vector<int>());
+        c.getIds(out[out.size()-1]);
+        
+    }
+
+    return out;
 }
 
 Coalition& Simulation::getCoalition(int coalitionId)
