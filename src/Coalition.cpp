@@ -1,14 +1,14 @@
 #include "../include/Coalition.h"
 #include "../include/Party.h"
-#include <iostream>
-#include <vector>
-#include <algorithm>
+// #include <iostream>
+// #include <vector>
+// #include <algorithm>
 
 
 Coalition::Coalition(int id, Party& party): coalitionId(id),mandatesSum(party.getMandates()),partysIds(),partysIdsInvites()
 {   
     partysIds.push_back(party.getId());
-    partysIdsInvites.push_back(-1);
+    // partysIdsInvites.push_back(-1);
     party.setState(State::Joined);
     party.setCoalition(coalitionId);
 }
@@ -36,23 +36,27 @@ void Coalition::addInvite(int partyId)
 bool Coalition::isInvited(int partyId)
 {
     
-    for (size_t i = 0; i < partysIdsInvites.size(); i++)
+
+
+    auto it = partysIdsInvites.begin();
+
+    while (it != partysIdsInvites.end())
     {
-        if (partysIdsInvites[i] == partyId)
+        if (*it == partyId)
         {
             return true;
         }
-        
+        it++;
+        /* code */
     }
     
-
     // for(const int& partyIdV:partysIdsInvites)
     // {
         
     //     if (partyIdV == partyId)
     //     {
     //         return true;
-    //         partysIdsInvites.
+    //         // partysIdsInvites.
     //     }
         
     // }

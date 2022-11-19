@@ -12,9 +12,13 @@ void EdgeWeightSelectionPolicy::Select(Simulation& simulation,int partyId,vector
             maxWeightId = partyIdV;
         }
     }
+    if (maxWeightId != -1)
+    {
+        simulation.getParty(maxWeightId).invite(simulation.getCoalition(simulation.getParty(partyId).getCoalition()),agentId,simulation.getIterationCounter());//invite the party
+        simulation.getCoalition(simulation.getParty(partyId).getCoalition()).addInvite(maxWeightId); // add to coalition the invite
+        /* code */
+    }
     
-    simulation.getParty(maxWeightId).invite(simulation.getCoalition(simulation.getParty(partyId).getCoalition()),agentId,simulation.getIterationCounter());//invite the party
-    simulation.getCoalition(simulation.getParty(partyId).getCoalition()).addInvite(maxWeightId); // add to coalition the invite
     
 }
 SelectionPolicy* EdgeWeightSelectionPolicy::clone(){

@@ -66,7 +66,9 @@ Agent& Agent::operator=(Agent && other) noexcept
     return *this;
 }
 
-
+void Agent::setCoalition(int coalitionId) {
+    mCoalitionId = coalitionId;
+}
 int Agent::getId() const
 {
     return mAgentId;

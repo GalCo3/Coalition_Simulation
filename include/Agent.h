@@ -18,7 +18,7 @@ public:
 
     void setId(int id);
     void setPartyId(int partyId);
-
+    void setCoalition(int coalitionId);
 
     int getPartyId() const;
     int getId() const;
