@@ -10,7 +10,7 @@ class Agent
 {
 public:
     Agent(int agentId, int partyId, SelectionPolicy *selectionPolicy);
-    virtual ~Agent();
+    virtual ~Agent();  //rule of 5 agent
     Agent(const Agent &other);
     Agent(Agent && other) noexcept;
     Agent& operator=(const Agent& other);

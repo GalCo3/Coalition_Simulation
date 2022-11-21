@@ -9,7 +9,7 @@ Agent::Agent(int agentId, int partyId, SelectionPolicy *selectionPolicy) : mAgen
     // You can change the implementation of the constructor, but not the signature!
      
 }
-Agent::~Agent()
+Agent::~Agent() //destructor
 {
     if(mSelectionPolicy){
         delete mSelectionPolicy;
@@ -29,7 +29,7 @@ Agent::Agent(Agent && other) noexcept:
     other.mSelectionPolicy= nullptr;
 }
 
-Agent& Agent::operator=(const Agent& other)
+Agent& Agent::operator=(const Agent& other) //copy assignment operator
 {
     mAgentId = other.mAgentId;
     mPartyId = other.mPartyId; 
@@ -53,7 +53,7 @@ Agent& Agent::operator=(const Agent& other)
     return *this;
 }
 
-Agent& Agent::operator=(Agent && other) noexcept
+Agent& Agent::operator=(Agent && other) noexcept // move assignment operator
 {
     mAgentId = other.mAgentId;
     mPartyId = other.mPartyId; 
@@ -66,7 +66,7 @@ Agent& Agent::operator=(Agent && other) noexcept
     return *this;
 }
 
-void Agent::setCoalition(int coalitionId) {
+void Agent::setCoalition(int coalitionId) { //update the coalition id from -1 to the coalition id that the agent joined her.
     mCoalitionId = coalitionId;
 }
 int Agent::getId() const
@@ -84,7 +84,7 @@ int Agent::getCoalitonId()
     return mCoalitionId;
 }
 
-void Agent::setId(int id)
+void Agent::setId(int id) // update the agent id if the agent duplicated.
 {
     mAgentId = id;
 }
@@ -96,18 +96,17 @@ void Agent::setPartyId(int partyId)
 
 void Agent::step(Simulation &sim)
 {
-    vector<int> potentialNeighbors;
+    vector<int> potentialNeighbors; // vector that contains the neighbors
     sim.getGraph().getPotentialNeighbors(mPartyId,potentialNeighbors);
-    vector<int> potentialNeighborsOut;
-    // Coalition &coalition = sim.getCoalition(mCoalitionId);
+    vector<int> potentialNeighborsOut; //vector that contains the neighbors we haven't invited yet.
     for(int newPotential: potentialNeighbors)
     {
-        if(!sim.getCoalition(mCoalitionId).isInvited(newPotential)){
-            potentialNeighborsOut.push_back(newPotential);
+        if(!sim.getCoalition(mCoalitionId).isInvited(newPotential)){ // if we haven't invide yet
+            potentialNeighborsOut.push_back(newPotential); // add him
         }
     }
 
-    mSelectionPolicy->Select(sim,mPartyId,potentialNeighborsOut,mAgentId);
+    mSelectionPolicy->Select(sim,mPartyId,potentialNeighborsOut,mAgentId); // invite the proper party
     // TODO: implement this method
 
 
