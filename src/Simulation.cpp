@@ -36,9 +36,9 @@ void Simulation::step()
     iterationCounter++;
 }
 
-void Simulation::newAgent(int agentId,int partyId)
+void Simulation::newAgent(int agentId,int partyId) //create the replicated agent
 {
-    mAgents.push_back(Agent(mAgents[agentId]));
+    mAgents.push_back(Agent(mAgents[agentId])); // add to the vector of agents
     mAgents[mAgents.size()-1].setId(mAgents.size()-1);
     mAgents[mAgents.size()-1].setPartyId(partyId);
     mAgents[mAgents.size()-1].setCoalition(mAgents[agentId].getCoalitonId());

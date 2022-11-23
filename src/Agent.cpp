@@ -6,7 +6,7 @@
 
 Agent::Agent(int agentId, int partyId, SelectionPolicy *selectionPolicy) : mAgentId(agentId), mPartyId(partyId), mSelectionPolicy(selectionPolicy),mCoalitionId(-1)
 {
-    // You can change the implementation of the constructor, but not the signature!
+ // You can change the implementation of the constructor, but not the signature!
      
 }
 Agent::~Agent() //destructor
@@ -108,10 +108,7 @@ void Agent::step(Simulation &sim)
 
     mSelectionPolicy->Select(sim,mPartyId,potentialNeighborsOut,mAgentId); // invite the proper party
     // TODO: implement this method
-
-
     //chose party from set via Edge/Weight
-
     // check that you dont alredy ivite this
     // party --> invite
 }

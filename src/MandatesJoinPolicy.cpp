@@ -10,7 +10,7 @@ JoinPolicy* MandatesJoinPolicy::clone()
 
 void MandatesJoinPolicy::join(Party& party,Simulation& sim){
 
-    party.join(party.getCoalitionIdMostMandates(), sim,1);
+    party.join(party.getCoalitionIdMostMandates(), sim,1); // if which==1 --> we select the mostMandates agent
 }
 
 string MandatesJoinPolicy::getJoinType()

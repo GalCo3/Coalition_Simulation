@@ -10,8 +10,8 @@ public:
     Graph(vector<Party> vertices, vector<vector<int>> edges);
     int getMandates(int partyId) const;
     int getEdgeWeight(int v1, int v2) const;
-    int getNumVertices() const;
-    void getPotentialNeighbors(int partyId,vector<int>& vec);
+    int getNumVertices() const; //total number of parties
+    void getPotentialNeighbors(int partyId,vector<int>& vec); //parties we can invite
     const Party &getParty(int partyId) const;
     Party &getParty(int partyId);
     void stepGraph(Simulation& sim);

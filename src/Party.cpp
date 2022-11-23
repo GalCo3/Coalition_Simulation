@@ -18,7 +18,7 @@ Party::~Party() //destructor
     
 }
 
-Party::Party(const Party& other) : 
+Party::Party(const Party& other) : //copy constructor
     mId(other.mId),mName(other.mName),mMandates(other.mMandates),
 
     mJoinPolicy(other.mJoinPolicy->clone()),mState(other.mState),iterrationInvite(other.iterrationInvite),
@@ -43,7 +43,7 @@ Party::Party(Party && other) noexcept:
 }
 
 
-Party& Party::operator=(const Party& other)
+Party& Party::operator=(const Party& other) //copy assignment operator
 {
     mId = other.mId;
     mName = other.mName; 
@@ -74,7 +74,7 @@ Party& Party::operator=(const Party& other)
     return *this;
 }
 
-Party& Party::operator=(Party && other) noexcept
+Party& Party::operator=(Party && other) noexcept // move assignment operator
 {
     mId = other.mId;
     mName = other.mName; 
@@ -93,13 +93,6 @@ Party& Party::operator=(Party && other) noexcept
     
     return *this;
 }
-
-
-
-
-
-
-
 
 
 State Party::getState() const
@@ -124,14 +117,10 @@ const string & Party::getName() const
 
 void Party::step(Simulation &s)
 {
-
     // if itteration counter != -1  itteration counter  = start iterraion + 3 --> decide and change color to red
     if(iterrationInvite!=-1){
-        if(s.getIterationCounter()-iterrationInvite==3){
+        if(s.getIterationCounter()-iterrationInvite==3){ 
             mJoinPolicy ->join(*this,s);
-        }
-        else{
-        // iterrationInvite++;
         }
     }
     
@@ -151,15 +140,13 @@ void Party::invite(Coalition& coalition,int agentId, int i)
         mState=CollectingOffers; // change color if not changed to yellow
     }
     coalitionIdLastInvite=coalition.getId();// change lastInvite 
-    agentIdLastOffer = agentId;
+    agentIdLastOffer = agentId; //update the id's party of the last one we invited
 
     if(inviteMaxMandats<coalition.getMandatesSum()||(inviteMaxMandats==coalition.getMandatesSum()&& coalitionId_MostMandates>coalition.getId()) ){
         inviteMaxMandats=coalition.getMandatesSum();
-        coalitionId_MostMandates= coalition.getId();
-        agentIdMaxMadndates = agentId;
+        coalitionId_MostMandates= coalition.getId(); //update the coalition's id with the maximum number of mandates
+        agentIdMaxMadndates = agentId; //update the id of the agent who invited us of the coalition with the large number of mandates.
     }
-    
- 
 }
 
 int Party::getCoalition()
@@ -176,13 +163,13 @@ void Party::setCoalition(int coalitionId)
 
 void Party::join(int coalitionIdToJoin, Simulation& sim,int which){
 
-    sim.getCoalition(coalitionIdToJoin).addParty(*this);
+    sim.getCoalition(coalitionIdToJoin).addParty(*this); 
     coalition = coalitionIdToJoin;
     setState(State::Joined);
     
-    if (which == 0)
+    if (which == 0) // we select the lastoffer agent
     {
-        sim.newAgent(agentIdLastOffer,mId);
+        sim.newAgent(agentIdLastOffer,mId); //create a new cloned agent according to the JoinPolicy
     }
 
     else
@@ -191,7 +178,6 @@ void Party::join(int coalitionIdToJoin, Simulation& sim,int which){
     }
     
 }
-
 
 int Party::getCoalitionIdLastInvite(){
     return coalitionIdLastInvite;
