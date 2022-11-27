@@ -17,7 +17,6 @@ Simulation::Simulation(Graph graph, vector<Agent> agents) : mGraph(graph), mAgen
         mAgents[i].setCoalition(i);
         it++;
         i++;
-        /* code */
     }
     
     
@@ -47,7 +46,6 @@ void Simulation::newAgent(int agentId,int partyId) //create the replicated agent
 bool Simulation::shouldTerminate() const
 {
     // TODO implement this method
-
     // check if coalition has 61 mandated or everyone join
     for(const Coalition& coalition : mCoalition)
     {
@@ -96,12 +94,9 @@ const vector<vector<int>> Simulation::getPartiesByCoalitions() const
     
     for(const Coalition &c :mCoalition)
     {
-        
         out.push_back(vector<int>());
         c.getIds(out[out.size()-1]);
-        
     }
-
     return out;
 }
 
