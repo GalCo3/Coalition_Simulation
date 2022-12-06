@@ -35,7 +35,7 @@ public:
     void step(Simulation &s);
     const string &getName() const; //??
     int getId();
-    void invite(Coalition& coalition,int agentId,int i);
+    void invite(Coalition& coalition,int _partyId,int agentId,int i);
 
     int getCoalition();
     void setCoalition(int coalitionId);
@@ -58,6 +58,7 @@ private:
     int coalitionId_MostMandates;
     int inviteMaxMandats; 
     int agentIdMaxMadndates;
+    int partyIdMaxMandates;
 
     int coalitionIdLastInvite;
     int agentIdLastOffer;
